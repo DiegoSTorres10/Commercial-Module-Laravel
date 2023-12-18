@@ -1,0 +1,19 @@
+.fondoTabla {
+    background-color: #d1d3d2;
+
+}
+
+
+.table-striped tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #e6f7ff;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #73C2FB; /* Cambia el color según tu preferencia */
+    cursor: pointer;
+}

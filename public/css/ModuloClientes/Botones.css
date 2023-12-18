@@ -1,0 +1,35 @@
+
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to left, #3e5f8a, #3498db);
+    color: whitesmoke;
+    padding: 5px 10px; 
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 180px;
+    box-sizing: border-box; 
+
+}
+
+.botones:hover {
+    background-color: #abd1c6;
+    color:white;
+    transform: scale(1.1); 
+}
+
+.botones i {
+    font-size: 32px;
+}
+
+
+@media (max-width: 450px) {
+    .botones {
+        width: 100px; 
+    }
+}
