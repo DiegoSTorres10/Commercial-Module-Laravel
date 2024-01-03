@@ -85,7 +85,8 @@ function validarCantidadExistencia(input) {
 
 $(document).ready(function () {
 
-
+    let key = 1;
+    let ProductosSelecionado = []
 
     /**
      * Maneja el evento de entrada en el campo de descuento, ajusta el formato y actualiza el descuento total.
@@ -130,6 +131,7 @@ $(document).ready(function () {
 
 
 
+
     /**
      * Esta función maneja el evento de cambio en la selección del almacén con el id 'IdAlmacen'.
      * Se realiza una verificación de la selección del almacén y del cliente, y se ejecuta una solicitud AJAX para obtener productos según el almacén.
@@ -137,7 +139,7 @@ $(document).ready(function () {
      * Además, se restablecen algunos valores en los campos de Subtotal, IVA, Total de Compra y Descuento Total.
      */
     $('#IdAlmacen').on('change', function () {
-        let key = 1;
+
         $('#tabla-productos-cotizar').empty();
         $('#SubtotalOficial').val(0);
         $('#IVATotal').val(0);
@@ -205,8 +207,7 @@ $(document).ready(function () {
 
 
 
-    let key = 1;
-    let ProductosSeleccionados = [];
+
 
 
     /**
@@ -218,7 +219,7 @@ $(document).ready(function () {
     $('#tabla-productos-cotizar').on('change', 'select[name="Clave[]"]', function () {
         let selectedOption = $(this).val();
         let currentRow = $(this).closest('tr');
-        ProductosSeleccionados.push(selectedOption);
+        ProductosSelecionado.push(selectedOption);
 
         // Realizar una solicitud AJAX para obtener los detalles del producto seleccionado desde el servidor
         $.ajax({
@@ -297,12 +298,10 @@ $(document).ready(function () {
             success: function (data) {
                 let options = '';
                 data.forEach(producto => {
-                    // Verifica si el producto ya está en la lista de productos seleccionados
-                    let productoExistente = ProductosSelecionado.find(item => item === producto.ClaveProducto);
+                    let productoExistente = ProductosSelecionado.find(item => item === producto.ClaveProducto); // Verifica si el producto ya está en ProductosSelecionado
                     if (!productoExistente)
                         options += `<option value="${producto.ClaveProducto}">${producto.Nombre} [${producto.ClaveProducto}]</option>`;
                 });
-
                 // Agrega una nueva fila a la tabla con los datos obtenidos
                 $('#tabla-productos-cotizar').append(`
                 <tr class="table-active fila-producto">
@@ -359,7 +358,7 @@ $(document).ready(function () {
      * Verifica que se hayan agregado productos y que se haya ingresado cantidad y producto para cada uno.
      * Muestra un mensaje de error si no se cumplen las condiciones.
      */
-    $('#Enviar-Salida').click(function () {
+    $('#Enviar-Salida').click(function (event) {
         event.preventDefault();
         let productosCompletos = true;
 
